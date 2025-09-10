@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plutara.digital</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #FFF9F5; /* Um branco levemente quente */
+        }
+
+        .container {
+            max-width: 48rem; /* 768px */
+            width: 100%;
+            margin: auto;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 1.5rem; /* 24px */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border: 1px solid #FFEDD5; /* Um laranja muito claro */
+        }
+
+        .text-4xl {
+            font-size: 2.25rem; /* 36px */
+            line-height: 2.5rem; /* 40px */
+        }
+        .font-bold { font-weight: 700; }
+        .font-sans { font-family: 'Inter', sans-serif; }
+        .text-orange-600 { color: #EA580C; }
+        .text-gray-600 { color: #4B5563; }
+        .text-gray-800 { color: #1F2937; }
+        .text-gray-400 { color: #9CA3AF; }
+        .text-gray-500 { color: #6B7280; }
+        .text-sm { font-size: 0.875rem; }
+        .text-center { text-align: center; }
+
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mb-8 { margin-bottom: 2rem; }
+        .mt-1 { margin-top: 0.25rem; }
+        .mt-4 { margin-top: 1rem; }
+        .mt-6 { margin-top: 1.5rem; }
+        .mt-8 { margin-top: 2rem; }
+        .pt-6 { padding-top: 1.5rem; }
+        .p-4 { padding: 1rem; }
+
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem; /* 12px */
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px; /* rounded-full */
+            font-weight: 700;
+            color: #fff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transform: scale(1);
+            transition: transform 0.3s, background-color 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+        
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: scale(1);
+        }
+
+        .btn-orange {
+            background-color: #F97316; /* Laranja 500 */
+        }
+        .btn-orange:hover {
+            background-color: #EA580C; /* Laranja 600 */
+        }
+        .btn-magic {
+            background-image: linear-gradient(to right, #F97316, #F59E0B); /* Gradiente Laranja-Âmbar */
+        }
+        .btn-magic:hover {
+            background-image: linear-gradient(to right, #EA580C, #D97706);
+        }
+
+        .upload-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 32rem; /* 512px */
+            height: 14rem; /* 224px */
+            border: 4px dashed #FDBA74; /* Laranja 300 */
+            border-radius: 1.5rem; /* 24px */
+            cursor: pointer;
+            transition: border-color 0.2s, background-color 0.2s;
+        }
+
+        .upload-box:hover {
+            border-color: #F97316;
+            background-color: #FFF7ED; /* Laranja 50 */
+        }
+        .w-16 { width: 4rem; }
+        .h-16 { height: 4rem; }
+        .text-orange-400 { color: #FB923C; }
+        .text-orange-600 { color: #EA580C; }
+        .hidden { display: none; }
+        .font-medium { font-weight: 500; }
+        
+        textarea {
+            width: 100%;
+            max-width: 48rem;
+            height: 16rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 2px solid #FDBA74;
+            border-radius: 0.75rem;
+            resize: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #F97316;
+            box-shadow: 0 0 0 2px rgba(251, 146, 60, 0.5); /* Anel laranja */
+        }
+
+        .results-box {
+            width: 100%;
+            max-width: 48rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            background-color: #FFF7ED;
+            border-radius: 1.5rem;
+            border: 2px solid #FFEDD5;
+        }
+
+        .text-red-500 { color: #EF4444; }
+        .whitespace-pre-wrap { white-space: pre-wrap; }
+        .sm\:flex-row { flex-direction: column; }
+        @media (min-width: 640px) {
+            .sm\:flex-row { flex-direction: row; }
+            #linkedin-login-btn {
+                width: 65%;
+            }
+            #magic-analysis-btn {
+                width: 65%;
+            }
+            textarea {
+                margin-left: 40px;
+                margin-right: 40px;
+            }
+        }
+        .sm\:space-y-0 > * + * { margin-top: 0; }
+        .sm\:space-x-4 > * + * { margin-left: 1rem; }
+    </style>
+</head>
+<body>
+
+    <div id="app" class="container">
+        <!-- O conteúdo será renderizado aqui pelo JavaScript -->
+    </div>
+
+    <script>
+        // Variáveis de estado
+        let currentPage = 'login';
+        let userName = '';
+        let jobDescription = '';
+        let jobSummary = '';
+        let coverLetter = '';
+        let isLoading = false;
+        let error = '';
+
+        const appDiv = document.getElementById('app');
+
+        // Renderiza o conteúdo na tela
+        const render = () => {
+            let content = '';
+            
+            if (currentPage === 'login') {
+                content = `
+                    <div class="card">
+                        <h1 class="text-4xl font-bold text-orange-600 mb-2 font-sans">Vamos começar! 😊</h1>
+                        <p class="text-gray-600 mb-8 text-center" style="font-size: 1.125rem;">
+                            Quer alcançar a vaga dos sonhos? O primeiro passo é fazer o login com sua conta do LinkedIn. É só clicar no botão abaixo.
+                        </p>
+                        <button id="linkedin-login-btn" class="btn-orange" style="width: 100%;">
+                            <svg style="width: 30px; height: 30px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                <rect x="2" y="9" width="4" height="12" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg>
+                            <span style="font-size: 1.125rem;">Entrar com LinkedIn</span>
+                        </button>
+                    </div>
+                `;
+            } else if (currentPage === 'welcome') {
+                content = `
+                    <div class="card">
+                        <h1 class="text-4xl font-bold text-orange-600 mb-2 font-sans">Que bom te ver por aqui, ${userName}!</h1>
+                        <p class="text-gray-600 mb-6 text-center">
+                            ✔ Seu perfil do LinkedIn está conectado com sucesso.
+                        </p>
+                        <p class="text-gray-800 mb-4 font-semibold">
+                            Agora, faça o upload do seu <u><b>currículo</b></u> para começarmos.
+                        </p>
+                        <label id="upload-box-label" for="file-upload" class="upload-box">
+                            <svg class="w-16 h-16 text-orange-400 mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242M12 12v9m-4-5l4 4 4-4" />
+                            </svg>
+                            <p class="text-gray-500 font-medium">
+                                Arraste e solte seu arquivo aqui ou <span class="text-orange-600 font-bold">clique para selecionar</span>
+                            </p>
+                            <p class="text-gray-400 text-sm mt-1">Formatos suportados: .pdf, .docx, .doc e .txt</p>
+                            <input id="file-upload" type="file" class="hidden" accept=".pdf,.docx,.txt" />
+                        </label>
+                    </div>
+                `;
+            } else if (currentPage === 'jobDescription') {
+                let resultsHTML = '';
+                if (jobSummary || coverLetter) {
+                    resultsHTML = `
+                        <div class="results-box">
+                            ${jobSummary ? `
+                                <div>
+                                    <h2 class="text-2xl font-bold text-orange-600 mb-2">Resumo da Vaga:</h2>
+                                    <p class="text-gray-800 whitespace-pre-wrap">${jobSummary}</p>
+                                </div>
+                            ` : ''}
+                            ${coverLetter ? `
+                                <div class="mt-6 pt-6" style="border-top: 2px solid #FFEDD5;">
+                                    <h2 class="text-2xl font-bold text-orange-600 mb-2">Carta de Apresentação:</h2>
+                                    <p class="text-gray-800 whitespace-pre-wrap">${coverLetter}</p>
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                }
+                
+                content = `
+                    <div class="card">
+                        <h1 class="text-4xl font-bold text-orange-600 mb-4 font-sans text-center">Quase acabando...</h1>
+                        <p class="text-gray-600 mb-6 text-center" style="max-width: 32rem;">
+                            Agora cole o <b><u>texto completo da vaga de emprego</u></b> que faz seus olhos brilharem. 🤩
+                        </p>
+                        <textarea id="job-description-textarea" placeholder="Cole o texto da vaga aqui...">${jobDescription}</textarea>
+                        
+                        <div class="w-full" style="max-width: 32rem;">
+                            <button id="magic-analysis-btn" class="btn-magic" style="width: 100%;">
+                                <span style="font-size: 1.125rem;">Fazer análise mágica do meu perfil ✨</span>
+                            </button>
+                        </div>
+                        
+                        ${error ? `<p class="text-red-500 text-center mt-4">${error}</p>` : ''}
+                        
+                        ${resultsHTML}
+                    </div>
+                `;
+            }
+
+            appDiv.innerHTML = content;
+            addEventListeners();
+        };
+
+        // Adiciona os eventos de click e drag and drop
+        const addEventListeners = () => {
+            if (currentPage === 'login') {
+                document.getElementById('linkedin-login-btn').addEventListener('click', handleLinkedInLogin);
+            } else if (currentPage === 'welcome') {
+                const uploadLabel = document.getElementById('upload-box-label');
+                uploadLabel.addEventListener('drop', handleFileUpload);
+                uploadLabel.addEventListener('dragover', preventDefaults);
+                uploadLabel.addEventListener('dragenter', preventDefaults);
+                document.getElementById('file-upload').addEventListener('change', handleFileUpload);
+            } else if (currentPage === 'jobDescription') {
+                const textarea = document.getElementById('job-description-textarea');
+                const magicBtn = document.getElementById('magic-analysis-btn');
+
+                // Garante que o botão está desabilitado no início, se o textarea estiver vazio
+                magicBtn.disabled = textarea.value.trim().length === 0;
+
+                textarea.addEventListener('input', (e) => {
+                    jobDescription = e.target.value;
+                    magicBtn.disabled = jobDescription.trim().length === 0;
+                });
+                document.getElementById('magic-analysis-btn').addEventListener('click', handleMagicAnalysis);
+            }
+        };
+
+        // Funções de Navegação e Simulação
+        const handleLinkedInLogin = () => {
+            userName = 'João';
+            currentPage = 'welcome';
+            render();
+        };
+
+        const handleFileUpload = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const files = e.dataTransfer ? e.dataTransfer.files : e.target.files;
+            if (files.length > 0) {
+                alert(`Você selecionou o arquivo: ${files[0].name}.`);
+                currentPage = 'jobDescription';
+                render();
+            }
+        };
+        
+        const preventDefaults = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+        };
+
+        // Funções da API do Gemini (simuladas)
+        const callGeminiApi = async (prompt, systemInstruction) => {
+            // Esta é uma SIMULAÇÃO da chamada de API.
+            // Em um projeto real, você enviaria a requisição para a API do Gemini.
+            // Para testar, vamos retornar um texto pré-definido.
+            console.log("Chamando API do Gemini com o prompt:", prompt);
+            await new Promise(resolve => setTimeout(resolve, 1500)); // Simula o tempo de carregamento
+            
+            if (prompt.includes("Resuma")) {
+                return "Obrigado por nos aguardar. A vaga de emprego para Analista de Marketing Digital busca um profissional com experiência em SEO, Google Ads e criação de conteúdo. É necessário ser proativo e ter habilidades de análise de dados. É um trabalho híbrido na cidade de São Paulo.";
+            } else if (prompt.includes("Escreva uma carta")) {
+                return "Prezado(a) [NOME DO RECRUTADOR],\n\nCom grande entusiasmo, apresento minha candidatura para a vaga de Analista de Marketing Digital. Minha experiência de [EXPERIÊNCIA RELEVANTE], combinada com minhas habilidades em [HABILIDADES RELEVANTES], se alinham perfeitamente com os requisitos da vaga.\n\nEstou confiante de que posso contribuir significativamente para o sucesso de sua equipe. Agradeço a sua atenção e me coloco à disposição para uma conversa.\n\nAtenciosamente,\n[NOME DO CANDIDATO]";
+            }
+            return null;
+        };
+
+        const handleMagicAnalysis = async () => {
+            if (isLoading) return;
+            isLoading = true;
+            jobSummary = '';
+            coverLetter = '';
+            error = '';
+            render();
+
+            try {
+                // Simulação de chamada de API para resumo e carta
+                jobSummary = await callGeminiApi(`Resuma a seguinte vaga:\n\n${jobDescription}`, "Você é um analista de recrutamento...");
+                if (!jobSummary) throw new Error("Não foi possível gerar o resumo.");
+                
+                coverLetter = await callGeminiApi(`Escreva uma carta para a seguinte vaga:\n\n${jobDescription}`, "Você é um escritor de cartas...");
+                if (!coverLetter) throw new Error("Não foi possível gerar a carta.");
+
+            } catch (err) {
+                console.error("Erro na análise:", err);
+                error = "Ocorreu um erro durante a análise. Por favor, tente novamente.";
+            } finally {
+                isLoading = false;
+                render();
+            }
+        };
+
+        // Renderiza a página inicial quando o script é carregado
+        window.onload = render;
+
+    </script>
+</body>
+</html>
