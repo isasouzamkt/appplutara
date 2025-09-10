@@ -1,9 +1,9 @@
-# 🌟 Plutara Digital – Seu currículo turbinado pela IA! 🚀  
+# 🌟 Seu LinkedIn e currículo turbinados pela IA! 🚀  
 
 Bem-vindo(a) ao **Plutara Digital**, um projetinho que criei para mostrar minhas skills e, de quebra, ajudar qualquer pessoa a brilhar na busca pela vaga dos sonhos ✨.  
 
 ## O que esse site faz?  
-Sabe quando você manda currículo e parece que ele vai direto pro *buraco negro do RH*? Pois é… o Plutara Digital veio pra aumentar suas chances de ser notado(a). Aqui está o passo a passo mágico:  
+Sabe quando você manda currículo e parece que ele vai direto pro *buraco negro do RH*? Pois é… o esse projetinho veio pra aumentar suas chances de ser notado(a). Aqui está o passo a passo mágico:  
 
 1. **Login social com LinkedIn** – você entra rapidinho usando o seu perfil (sem burocracia ✌️).  
 2. **Upload do seu currículo** – aquele PDF guardado com carinho no computador.  
