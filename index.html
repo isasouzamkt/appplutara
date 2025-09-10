@@ -99,6 +99,12 @@
         .btn-magic:hover {
             background-image: linear-gradient(to right, #EA580C, #D97706);
         }
+        .btn-next {
+            background-color: #F97316;
+            margin-top: 1.5rem;
+            font-size: 1.125rem;
+            padding: 0.875rem 2rem;
+        }
 
         .upload-box {
             display: flex;
@@ -173,6 +179,10 @@
         }
         .sm\:space-y-0 > * + * { margin-top: 0; }
         .sm\:space-x-4 > * + * { margin-left: 1rem; }
+        .flex-center {
+            display: flex;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
@@ -190,6 +200,7 @@
         let coverLetter = '';
         let isLoading = false;
         let error = '';
+        let selectedFile = null;
 
         const appDiv = document.getElementById('app');
 
@@ -215,15 +226,28 @@
                     </div>
                 `;
             } else if (currentPage === 'welcome') {
-                content = `
-                    <div class="card">
-                        <h1 class="text-4xl font-bold text-orange-600 mb-2 font-sans">Que bom te ver por aqui, ${userName}!</h1>
-                        <p class="text-gray-600 mb-6 text-center">
-                            ✔ Seu perfil do LinkedIn está conectado com sucesso.
-                        </p>
-                        <p class="text-gray-800 mb-4 font-semibold">
-                            Agora, faça o upload do seu <u><b>currículo</b></u> para começarmos.
-                        </p>
+                let fileUploadContent = '';
+                if (selectedFile) {
+                    // Lógica para truncar o nome do arquivo
+                    let displayFileName = selectedFile;
+                    if (selectedFile.length > 40) {
+                        const fileParts = selectedFile.split('.');
+                        const extension = fileParts.pop();
+                        const name = fileParts.join('.');
+                        const truncatedName = name.substring(0, 40 - extension.length - 1);
+                        displayFileName = `${truncatedName}...${extension}`;
+                    }
+
+                    fileUploadContent = `
+                        <div class="flex-center p-4 bg-orange-50 rounded-lg w-full max-w-lg mb-4 justify-between">
+                            <span class="text-gray-800 font-medium truncate pr-4">${displayFileName}</span>
+                            <button id="remove-file-btn" class="p-1 rounded-full text-red-500 hover:bg-red-100 transition" style="margin-left: 25px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </button>
+                        </div>
+                    `;
+                } else {
+                    fileUploadContent = `
                         <label id="upload-box-label" for="file-upload" class="upload-box">
                             <svg class="w-16 h-16 text-orange-400 mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242M12 12v9m-4-5l4 4 4-4" />
@@ -234,6 +258,22 @@
                             <p class="text-gray-400 text-sm mt-1">Formatos suportados: .pdf, .docx, .doc e .txt</p>
                             <input id="file-upload" type="file" class="hidden" accept=".pdf,.docx,.txt" />
                         </label>
+                    `;
+                }
+
+                content = `
+                    <div class="card">
+                        <h1 class="text-4xl font-bold text-orange-600 mb-2 font-sans">Que bom te ver por aqui, ${userName}!</h1>
+                        <p class="text-gray-600 mb-6 text-center">
+                            ✔ Conectado(a) com sucesso.
+                        </p>
+                        <p class="text-gray-800 mb-4 font-semibold">
+                            Agora, para otimizar seu currículo, faça o upload do arquivo.
+                        </p>
+                        ${fileUploadContent}
+                        <button id="next-step-btn" class="btn-next" ${!selectedFile ? 'disabled' : ''}>
+                            Enviar e dar o próximo passo
+                        </button>
                     </div>
                 `;
             } else if (currentPage === 'jobDescription') {
@@ -259,15 +299,15 @@
                 
                 content = `
                     <div class="card">
-                        <h1 class="text-4xl font-bold text-orange-600 mb-4 font-sans text-center">Quase acabando...</h1>
+                        <h1 class="text-4xl font-bold text-orange-600 mb-4 font-sans text-center">Análise da Vaga</h1>
                         <p class="text-gray-600 mb-6 text-center" style="max-width: 32rem;">
-                            Agora cole o <b><u>texto completo da vaga de emprego</u></b> que faz seus olhos brilharem. 🤩
+                            Cole o texto completo da vaga de emprego abaixo.
                         </p>
                         <textarea id="job-description-textarea" placeholder="Cole o texto da vaga aqui...">${jobDescription}</textarea>
                         
                         <div class="w-full" style="max-width: 32rem;">
                             <button id="magic-analysis-btn" class="btn-magic" style="width: 100%;">
-                                <span style="font-size: 1.125rem;">Fazer análise mágica do meu perfil ✨</span>
+                                <span style="font-size: 1.125rem;">Fazer minha análise mágica ✨</span>
                             </button>
                         </div>
                         
@@ -287,11 +327,16 @@
             if (currentPage === 'login') {
                 document.getElementById('linkedin-login-btn').addEventListener('click', handleLinkedInLogin);
             } else if (currentPage === 'welcome') {
-                const uploadLabel = document.getElementById('upload-box-label');
-                uploadLabel.addEventListener('drop', handleFileUpload);
-                uploadLabel.addEventListener('dragover', preventDefaults);
-                uploadLabel.addEventListener('dragenter', preventDefaults);
-                document.getElementById('file-upload').addEventListener('change', handleFileUpload);
+                if (selectedFile) {
+                    document.getElementById('remove-file-btn').addEventListener('click', handleRemoveFile);
+                    document.getElementById('next-step-btn').addEventListener('click', handleNextStep);
+                } else {
+                    const uploadLabel = document.getElementById('upload-box-label');
+                    uploadLabel.addEventListener('drop', handleFileUpload);
+                    uploadLabel.addEventListener('dragover', preventDefaults);
+                    uploadLabel.addEventListener('dragenter', preventDefaults);
+                    document.getElementById('file-upload').addEventListener('change', handleFileUpload);
+                }
             } else if (currentPage === 'jobDescription') {
                 const textarea = document.getElementById('job-description-textarea');
                 const magicBtn = document.getElementById('magic-analysis-btn');
@@ -319,10 +364,19 @@
             e.stopPropagation();
             const files = e.dataTransfer ? e.dataTransfer.files : e.target.files;
             if (files.length > 0) {
-                alert(`Você selecionou o arquivo: ${files[0].name}.`);
-                currentPage = 'jobDescription';
+                selectedFile = files[0].name;
                 render();
             }
+        };
+        
+        const handleRemoveFile = () => {
+            selectedFile = null;
+            render();
+        };
+
+        const handleNextStep = () => {
+            currentPage = 'jobDescription';
+            render();
         };
         
         const preventDefaults = (e) => {
