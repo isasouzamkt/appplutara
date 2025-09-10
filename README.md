@@ -17,7 +17,7 @@ Sabe quando você manda currículo e parece que ele vai direto pro *buraco negro
 Resumindo: é tipo um *coach de carreira*, mas sem frases clichês e com menos café derramado.  
 
 ## Tecnologias e bastidores  
-- **Front-end:** este site fofinho que você vê em [Plutara Digital](https://app.plutara.digital/)  
+- **Front-end:** este site fofinho feito com HTML, CSS e Javascript simples que você pode acessar [nesse site aqui.](https://app.plutara.digital/)  
 - **Automação:** um fluxo no **n8n** que conecta tudo e dá vida à mágica.  
 - **IA:** o cérebro por trás das sugestões inteligentes.  
 
