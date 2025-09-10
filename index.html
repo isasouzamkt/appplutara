@@ -286,7 +286,8 @@
                             <p class="text-gray-500 font-medium">
                                 Arraste e solte seu arquivo aqui ou <span class="text-orange-600 font-bold">clique para selecionar</span>
                             </p>
-                            <p class="text-gray-400 text-sm mt-1">Formatos suportados: .pdf, .docx, .doc e .txt</p>
+                            
+                            <p class="text-gray-400 text-sm mt-1">Formatos suportados: .pdf, .docx, .doc e .txt.</p>
                             <input id="file-upload" type="file" class="hidden" accept=".pdf,.docx,.txt" />
                         </label>
                     `;
@@ -298,9 +299,11 @@
                         <p class="text-gray-600 mb-6 text-center">
                             ✔ Conectado(a) com sucesso.
                         </p>
-                        <p class="text-gray-800 mb-4 font-semibold">
-                            Agora, para otimizar seu currículo, faça o upload do arquivo.
+                        <p class="text-gray-800 mb-4 font-semibold" style="text-align: center;">
+                            Agora faça o upload do <u><b>arquivo do seu currículo.</b></u>
                         </p>
+                        <p class="text-gray-400 text-sm mt-1"><b>Atenção!</b> Apenas currículos em Português são aceitos.</p>
+                        
                         ${fileUploadContent}
                         <button id="next-step-btn" class="btn-next" ${!selectedFile ? 'disabled' : ''}>
                             Enviar e dar o próximo passo
