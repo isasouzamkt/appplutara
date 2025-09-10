@@ -1,6 +1,6 @@
 # 🌟 Seu LinkedIn e currículo turbinados pela IA! 🚀  
 
-Bem-vindo(a) ao **Plutara Digital**, um projetinho que criei para mostrar minhas skills e, de quebra, ajudar qualquer pessoa a brilhar na busca pela vaga dos sonhos ✨.  
+Esse é um projetinho que criei para mostrar minhas skills e, de quebra, ajudar qualquer pessoa a brilhar na busca pela vaga dos sonhos ✨.  
 
 ## O que esse site faz?  
 Sabe quando você manda currículo e parece que ele vai direto pro *buraco negro do RH*? Pois é… o esse projetinho veio pra aumentar suas chances de ser notado(a). Aqui está o passo a passo mágico:  
