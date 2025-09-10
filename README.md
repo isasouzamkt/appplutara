@@ -14,7 +14,7 @@ Sabe quando você manda currículo e parece que ele vai direto pro *buraco negro
    - Como atualizar seu currículo para ficar mais competitivo.  
 6. **Currículo atualizado em mãos** – você ainda pode baixar o arquivo novo prontinho pra usar! 📂✨  
 
-Resumindo: é tipo um *coach de carreira*, mas sem frases clichês e com menos café derramado.  
+Resumindo: é tipo um *coach*, mas sem frases clichês e com menos café derramado.  
 
 ## Tecnologias e bastidores  
 - **Front-end:** este site fofinho feito com HTML, CSS e Javascript simples que você pode acessar [nesse site aqui.](https://app.plutara.digital/)  
