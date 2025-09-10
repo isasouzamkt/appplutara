@@ -183,6 +183,30 @@
             display: flex;
             align-items: center;
         }
+
+        .intro-text {
+            color: #2D3748;
+            font-size: 1.25rem;
+            line-height: 1.75rem;
+        }
+        
+        .footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #FFEDD5;
+            text-align: center;
+            width: 100%;
+            color: #9CA3AF; /* gray-400 */
+            font-size: 0.875rem; /* text-sm */
+        }
+        .footer a {
+            color: #FB923C; /* orange-400 */
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -211,11 +235,15 @@
             if (currentPage === 'login') {
                 content = `
                     <div class="card">
-                        <h1 class="text-4xl font-bold text-orange-600 mb-2 font-sans">Vamos começar! 😊</h1>
-                        <p class="text-gray-600 mb-8 text-center" style="font-size: 1.125rem;">
-                            Quer alcançar a vaga dos sonhos? O primeiro passo é fazer o login com sua conta do LinkedIn. É só clicar no botão abaixo.
+                    
+                     <p class="text-center intro-text mb-8">
+                           Dê adeus ao currículo invisível! Vamos turbinar seu perfil e CV com a mágica da IA, deixando tudo perfeito para a sua vaga dos sonhos.
+                     </p>
+                        <h1 class="text-4xl font-bold text-orange-600 mb-2 font-sans">3, 2, 1... 🚀</h1>
+                        <p class="text-center" style="font-size: 1.125rem; font-weight: 500; color: #525252; max-width: 32rem;">
+                            Clique no botão para entrar com o seu LinkedIn.
                         </p>
-                        <button id="linkedin-login-btn" class="btn-orange" style="width: 100%;">
+                        <button id="linkedin-login-btn" class="btn-orange mt-6" style="width: 100%;">
                             <svg style="width: 30px; height: 30px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
                                 <rect x="2" y="9" width="4" height="12" />
@@ -223,6 +251,9 @@
                             </svg>
                             <span style="font-size: 1.125rem;">Entrar com LinkedIn</span>
                         </button>
+                        <div class="footer">
+                            Feito com carinho por Isadora Souza. <a href="https://www.linkedin.com/in/souza-isadora/" target="_blank">Conecte-se comigo!</a>
+                        </div>
                     </div>
                 `;
             } else if (currentPage === 'welcome') {
@@ -274,6 +305,9 @@
                         <button id="next-step-btn" class="btn-next" ${!selectedFile ? 'disabled' : ''}>
                             Enviar e dar o próximo passo
                         </button>
+                        <div class="footer">
+                            Feito com carinho por Isadora Souza. <a href="https://www.linkedin.com/in/souza-isadora/" target="_blank">Conecte-se comigo!</a>
+                        </div>
                     </div>
                 `;
             } else if (currentPage === 'jobDescription') {
@@ -314,6 +348,10 @@
                         ${error ? `<p class="text-red-500 text-center mt-4">${error}</p>` : ''}
                         
                         ${resultsHTML}
+
+                        <div class="footer">
+                            Feito com carinho por Isadora Souza. <a href="https://www.linkedin.com/in/souza-isadora/" target="_blank">Conecte-se comigo!</a>
+                        </div>
                     </div>
                 `;
             }
